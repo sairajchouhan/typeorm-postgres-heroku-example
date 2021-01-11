@@ -4,12 +4,8 @@ import { Todo } from './entity/Todo';
 
 const prodConnection: PostgresConnectionOptions = {
   type: 'postgres',
-  host: 'localhost',
-  port: 5432,
-  username: 'postgres',
-  password: 'aunzbedi',
-  database: 'sm1',
-  synchronize: true,
+  url: process.env.DATABASE_URL,
+  synchronize: false,
   logging: false,
   extra: {
     ssl: true,
