@@ -39,7 +39,7 @@ import { prodConnection } from './config';
   if (process.env.NODE_ENV === 'production') {
     createConnection(prodConnection)
       .then(() => {
-        console.log('connected to the databse in production...');
+        console.log('connected to the databse in production');
       })
       .catch((err) => {
         console.log('error in connecting to database in production');
