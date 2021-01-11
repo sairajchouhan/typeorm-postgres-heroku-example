@@ -4,6 +4,7 @@ dotenv.config();
 import { createConnection } from 'typeorm';
 import express, { Request, Response } from 'express';
 import { Todo } from './entity/Todo';
+import { prodConnection } from './config';
 
 (() => {
   const app = express();
@@ -35,15 +36,26 @@ import { Todo } from './entity/Todo';
   });
 
   const PORT = process.env.PORT || 5000;
-  createConnection()
-    .then(() => {
-      console.log('connected to databse');
-    })
-    .catch((err) => {
-      console.log('error in connecting to database');
-      console.log(err);
+  if (process.env.NODE_ENV === 'production') {
+    createConnection(prodConnection)
+      .then(() => {
+        console.log('connected to the databse in production');
+      })
+      .catch((err) => {
+        console.log('error in connecting to database in production');
+        console.log(err);
+      });
+  } else {
+    createConnection()
+      .then(() => {
+        console.log('connected to databse');
+      })
+      .catch((err) => {
+        console.log('error in connecting to database');
+        console.log(err);
+      });
+    app.listen(PORT, () => {
+      console.log('server is runing at port 5000');
     });
-  app.listen(PORT, () => {
-    console.log('server is runing at port 5000');
-  });
+  }
 })();
