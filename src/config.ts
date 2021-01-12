@@ -12,6 +12,11 @@ const prodConnection: PostgresConnectionOptions = {
   //   },
   // },
   ssl: true,
+  extra: {
+    ssl: {
+      rejectUnauthorized: false,
+    },
+  },
   entities: [Todo],
 };
 
