@@ -3,7 +3,7 @@ import { Todo } from './entity/Todo';
 
 const prodConnection: PostgresConnectionOptions = {
   type: 'postgres',
-  url: `${process.env.DATABASE_URL}?sslmode=require`,
+  url: `${process.env.DATABASE_URL}`,
   synchronize: false,
   logging: false,
   // extra: {
