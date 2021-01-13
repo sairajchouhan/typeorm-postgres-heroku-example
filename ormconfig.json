@@ -5,8 +5,8 @@
    "username": "postgres",
    "password": "aunzbedi",
    "database": "todos",
-   "synchronize": true,
-   "logging": false,
+   "synchronize": false,
+   "logging": true,
    "entities": [
       "src/entity/**/*.ts"
    ],

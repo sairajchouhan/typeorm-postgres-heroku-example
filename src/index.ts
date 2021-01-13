@@ -36,6 +36,7 @@ import { prodConnection } from './config';
   });
 
   const PORT = process.env.PORT || 5000;
+
   if (process.env.NODE_ENV === 'production') {
     createConnection(prodConnection)
       .then(() => {
