@@ -6,7 +6,7 @@ import express, { Request, Response } from 'express';
 import { Todo } from './entity/Todo';
 import { prodConnection } from './config';
 
-(() => {
+(async () => {
   const app = express();
 
   app.use(express.json());
@@ -38,17 +38,19 @@ import { prodConnection } from './config';
   const PORT = process.env.PORT || 5000;
 
   if (process.env.NODE_ENV === 'production') {
-    createConnection(prodConnection)
-      .then(() => {
-        console.log('connected to the databse in prod');
-        app.listen(PORT, () => {
-          console.log('server is up and running at port', PORT);
-        });
-      })
-      .catch((err) => {
-        console.log('error in connecting to database ');
-        console.log(err);
+    try {
+      const connection = await createConnection(prodConnection);
+      await connection.runMigrations();
+      console.log('connected to the databse in prod');
+      app.listen(PORT, () => {
+        console.log('server is up and running at port', PORT);
       });
+    } catch (error) {
+      console.log(
+        'Error while connecting to the database in production',
+        error
+      );
+    }
   } else {
     createConnection()
       .then(() => {
