@@ -16,6 +16,7 @@ const prodConnection: PostgresConnectionOptions = {
     },
   },
   entities: [Todo],
+  migrationsRun: true,
 };
 
 export { prodConnection };
